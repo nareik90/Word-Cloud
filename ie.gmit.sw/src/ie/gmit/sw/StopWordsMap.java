@@ -5,40 +5,43 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.HashSet;
 
-public class StopWordsMap {
-	private static HashSet<String> set = new HashSet<String>(); 
-
-	public StopWordsMap() throws Exception {
-		super();
-		parse("../stopwords.txt");
-	}
+public class StopWordsMap implements Parser
+{
+	private HashSet<String> stopWordsSet;
 	
-	public boolean compare(String word) {
-		// Return true if the file contains a stop word
-		if(set.contains(word)) return true;
-				
-		return false;
+	StopWordsMap(String filename) throws Exception
+	{
+		stopWordsSet = new HashSet<String>();
+		parse(filename);
 	}
-	
-	// Parses a text file of words to ignore and adds them to a hashset
-	private void parse(String filename) throws Exception {
+	public void parse(String filename) throws Exception 
+	{
 		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename)));
 		StringBuffer sb = new StringBuffer();
 		
 		int i;
-		while((i = br.read()) != -1) {
+		while((i = br.read()) != -1)
+		{
 			char next = (char)i;
 			
 			if (next != '\n') sb.append(next);
 			
-			else {
+			else 
+			{
 				String sWord = sb.toString().toUpperCase();
-				sb = new StringBuffer();
-								
-				set.add(sWord);
+				sb = new StringBuffer();	
+				stopWordsSet.add(sWord);
 			}
 		}
 		br.close();
-		System.out.println(set);
+	}
+	public boolean hasWord(String word)
+	{
+		boolean isThere = false;
+		if(stopWordsSet.contains(word))
+		{
+			isThere = true;
+		}
+		return isThere;
 	}
 }
