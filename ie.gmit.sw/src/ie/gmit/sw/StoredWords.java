@@ -5,14 +5,19 @@ import java.util.*;
 
 public class StoredWords implements Parser
 {
+	//Originaly tried to use a tree map because it could be ordered based on a value.
+	//This was intended to give a list of the top used words. Decided to go with a 
+	// #hash map as it is much faster.
+	
 	private Map<String, Integer> wordMap = new HashMap<String, Integer>();
 	private StopWordsMap s;
 	private WordCloud img;
 	private int maxWords;
 	
 	
-	private Map<String, Integer> sorted_map = new TreeMap<String,Integer>();
+	//private Map<String, Integer> sorted_map = new TreeMap<String,Integer>();
 
+	
 	public StoredWords(String filename, StopWordsMap sl, int max) throws Exception
 	{
 		s = sl;	
@@ -27,7 +32,6 @@ public class StoredWords implements Parser
 		StringBuffer sb = new StringBuffer();
 		
 		int j;
-		// Continue reading until end of file is reached
 		while((j = br.read()) != -1){
 			char next = (char)j;
 			
@@ -40,7 +44,7 @@ public class StoredWords implements Parser
 				String word = sb.toString().toUpperCase();
 				sb = new StringBuffer();
 				
-				// add words to map if they're not a stop word
+				// add words unless word is in stopword
 				if (!s.hasWord(word)&& word.length() > 5) 
 				{
 					
@@ -81,7 +85,7 @@ public class StoredWords implements Parser
 	public Map<String, Integer> getMap()
 	{	
 		//System.out.println(entriesSortedByValues(sorted_map));
-		System.out.println(wordMap);
+		//System.out.println(wordMap);
 		return wordMap;
 		
 	}

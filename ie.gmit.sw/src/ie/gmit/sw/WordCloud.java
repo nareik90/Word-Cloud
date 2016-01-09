@@ -11,12 +11,13 @@ import java.util.*;
 import javax.imageio.ImageIO;
 
 
-public class WordCloud
+public class WordCloud 
 {
 	private Map<String, Integer> map;
 	private int maxWords;
 	private RecShaped rectList;
 	private Graphics2D graphics;
+	private BackgroundColorRect bck = new BackgroundColorRect();
 	private Display dis;
 	private int xposition;
 	private int yposition ;
@@ -38,6 +39,8 @@ public class WordCloud
 	{
 		BufferedImage image = new BufferedImage(1920, 1080, BufferedImage.TYPE_4BYTE_ABGR);
 		graphics = (Graphics2D)image.getGraphics();
+		bck.backColor(1920, 1080, graphics);
+		bck = new BackgroundColorRect();
 		i = 0;
 		
 		for(String word : map.keySet())
@@ -59,7 +62,6 @@ public class WordCloud
 				dis.setFont();
 				dis.setColour();
 				
-	
 				drawWord(dis.getFont(), dis.getColour(),word, direction);
 			}
 			if(i == maxWords)
@@ -98,7 +100,7 @@ public class WordCloud
 				
 			case 3:
 				if(!(r.getX() < 0))				
-					yposition-=2;				
+					yposition-=4;				
 				else
 					resetPosition();
 				break;	

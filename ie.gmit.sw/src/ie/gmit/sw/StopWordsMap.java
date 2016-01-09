@@ -9,7 +9,7 @@ public class StopWordsMap implements Parser
 {
 	private HashSet<String> stopWordsSet;
 	
-	StopWordsMap(String filename) throws Exception
+	public StopWordsMap(String filename) throws Exception
 	{
 		stopWordsSet = new HashSet<String>();
 		parse(filename);
