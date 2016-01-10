@@ -6,7 +6,7 @@
  The size of the words is dependent on its importance and the colour is random.
  
  
- ## Running the Program
+ ##Running the Program
  Navigate to the Wordie.jar file. Then run the following line of code.
 	java –cp ./wordie.jar ie.gmit.sw.Runner
 	
