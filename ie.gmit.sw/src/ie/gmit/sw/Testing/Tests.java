@@ -9,7 +9,7 @@ public class Tests {
 
 	@Before
 	@After
-	public void destroyMap()
+	public void colapseStopMap()
 	{
 		wordTest = null;
 	}
